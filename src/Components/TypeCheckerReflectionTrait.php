@@ -21,8 +21,11 @@ trait TypeCheckerReflectionTrait
      */
     public function returnTypeIsInstanceOf(string $class): bool
     {
-        return $this->returnTypeIsEqual($class) ?:
-            is_subclass_of((string) $this->getReturnType(), $class);
+        $interfaces = class_implements((string) $this->getReturnType());
+
+        return $this->returnTypeIsEqual($class) ||
+            is_subclass_of((string) $this->getReturnType(), $class) ||
+            isset($interfaces[$class]);
     }
 
     /**

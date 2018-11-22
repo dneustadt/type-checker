@@ -6,7 +6,11 @@ include __DIR__ . '/test_function.php';
 
 use TypeChecker\TypeChecker;
 
-class TestTypeClass extends \ReflectionClass
+interface TestInterface
+{
+}
+
+class TestTypeClass extends \ReflectionClass implements TestInterface
 {
     protected function return_string(): string
     {
@@ -84,6 +88,18 @@ class TypeCheckerTest extends \PHPUnit_Framework_TestCase
             TypeChecker::reflectMethod('test_parameters', TestTypeClass::class)
                 ->getArgument(1)
                 ->typeIsInstanceOf('ReflectionClass')
+        );
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    public function testMethodArgumentTypeImplements()
+    {
+        $this->assertTrue(
+            TypeChecker::reflectMethod('test_parameters', TestTypeClass::class)
+                ->getArgument(1)
+                ->typeIsInstanceOf(TestInterface::class)
         );
     }
 }

@@ -21,7 +21,10 @@ class TypeCheckerReflectionParameter extends \ReflectionParameter
      */
     public function typeIsInstanceOf(string $class): bool
     {
-        return $this->typeIsEqual($class) ?:
-            is_subclass_of((string) $this->getType(), $class);
+        $interfaces = class_implements((string) $this->getType());
+
+        return $this->typeIsEqual($class) ||
+            is_subclass_of((string) $this->getType(), $class) ||
+            isset($interfaces[$class]);
     }
 }
