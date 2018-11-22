@@ -1,0 +1,22 @@
+{
+  "name": "dneustadt/type-checker",
+  "version": "1.0.0",
+  "keywords": ["return", "method", "function", "arguments", "parameters", "php7", "check", "equals"],
+  "description": "Simple implementation for asserting PHP7 scalar type declarations and return types",
+  "homepage": "https://davidneustadt.de",
+  "license": "MIT",
+  "require": {
+    "php": "^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "TypeChecker\\": "src"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
+  }
+}
